@@ -51,8 +51,8 @@ public class ExpenseOverviewFragment extends Fragment {
 
         double remaining = totalBudget - totalSpent;
 
-        tvTotalSpent.setText(String.format(Locale.getDefault(), "Total spent : %,.of ", totalSpent));
-        tvRemaining.setText(String.format(Locale.getDefault(), "Remaning Budget: %,. of", remaining));
+        tvTotalSpent.setText(String.format("Đã chi: %,.0f VNĐ", totalSpent));
+        tvRemaining.setText(String.format("Còn lại: %,.0f VNĐ", remaining));
 
         rvCategoryBreakdown.setLayoutManager(new LinearLayoutManager(getContext()));
         budgetAdapter = new BudgetAdapter(getContext(), budgetList, budgetDb, () -> refreshOverview());
@@ -60,24 +60,26 @@ public class ExpenseOverviewFragment extends Fragment {
 
         return view;
     }
-    private void refreshOverview(){
+    private void refreshOverview() {
         budgetList.clear();
         budgetList.addAll(budgetDb.getAllBudgets());
-        budgetAdapter.notifyDataSetChanged();
 
         double totalSpent = 0;
         double totalBudget = 0;
 
+        // Dynamically calculate spent using expenses
         for (Budget budget : budgetList) {
-            totalSpent += budget.getSpent();
+            double spent = budgetDb.getTotalSpentForCategory(budget.getCategory());
+            budget.setSpent(spent); // update dynamically
+            totalSpent += spent;
             totalBudget += budget.getAmount();
         }
+
         double remaining = totalBudget - totalSpent;
 
-        tvTotalSpent.setText(String.format(Locale.getDefault(), "Total spent : %,.of ", totalSpent));
-        tvRemaining.setText(String.format(Locale.getDefault(), "Remaning Budget: %,. of", remaining));
-
-
+        tvTotalSpent.setText(String.format("Đã chi: %,.0f VNĐ", totalSpent));
+        tvRemaining.setText(String.format("Còn lại: %,.0f VNĐ", remaining));
+        budgetAdapter.notifyDataSetChanged();
     }
 
     @Override

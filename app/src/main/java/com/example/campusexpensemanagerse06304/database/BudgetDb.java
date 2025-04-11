@@ -176,6 +176,22 @@ public class BudgetDb {
                 });
         return rows > 0;
     }
+    public double getTotalSpentForCategory(String category) {
+        double total = 0;
+        try {
+            Cursor cursor = dbRead.rawQuery(
+                    "SELECT SUM(amount) FROM expenses WHERE category = ?",
+                    new String[]{category}
+            );
+            if (cursor.moveToFirst()) {
+                total = cursor.getDouble(0);
+            }
+            cursor.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return total;
+    }
 
 
 
