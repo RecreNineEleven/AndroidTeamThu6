@@ -14,6 +14,10 @@
             android:title="Budget"
             android:icon="@drawable/account_balance_wallet_24dp"/>
         <item
+            android:id="@+id/menu_overview"
+            android:title="Overview"
+            />
+        <item
             android:id="@+id/menu_setting"
             android:title="Setting"
             android:icon="@drawable/settings_24dp"/>

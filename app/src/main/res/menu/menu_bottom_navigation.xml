@@ -13,7 +13,12 @@
         android:icon="@drawable/account_balance_wallet_24dp"
         android:id="@+id/menu_budget"/>
     <item
+        android:title="Overview"
+
+        android:id="@+id/menu_overview"/>
+    <item
         android:title="Settings"
         android:icon="@drawable/settings_24dp"
         android:id="@+id/menu_setting"/>
+
 </menu>
