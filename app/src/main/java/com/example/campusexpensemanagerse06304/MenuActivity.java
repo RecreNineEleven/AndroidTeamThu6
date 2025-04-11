@@ -148,6 +148,8 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
             budgetDb.insertBudget("Giải trí", 1000000, 500000);
             budgetDb.insertBudget("Di chuyển", 800000, 900000);
             budgetDb.insertBudget("Khác", 500000, 200000);
+
         }
     }
 }
+//test
